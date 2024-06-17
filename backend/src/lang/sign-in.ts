@@ -11,8 +11,8 @@ const strings = new LocalizedStrings({
     STAY_CONNECTED: 'Rester connecté',
   },
   en: {
-    SIGN_IN_HEADING: 'Sign inX',
-    SIGN_IN: 'Sign inX',
+    SIGN_IN_HEADING: 'Sign in',
+    SIGN_IN: 'Sign in',
     ERROR_IN_SIGN_IN: 'Incorrect email or password.',
     IS_BLACKLISTED: 'Your account is suspended.',
     RESET_PASSWORD: 'Forgot password?',
