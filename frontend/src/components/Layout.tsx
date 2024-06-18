@@ -18,7 +18,7 @@ interface LayoutProps {
 
 const Layout = ({
   user: masterUser,
-  strict,
+  strict= true,
   hideSignin,
   children,
   onLoad
@@ -103,25 +103,21 @@ const Layout = ({
     }
   }
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
-  if (!user || (strict && !user.verified)) {
-    return (
-      <div className="validate-email">
-        <span>{strings.VALIDATE_EMAIL}</span>
-        <Button type="button" variant="contained" size="small" className="btn-primary btn-resend" onClick={handleResend}>
-          {strings.RESEND}
-        </Button>
-      </div>
-    )
-  }
-
   return (
     <>
       <Header user={user} hidden={loading} hideSignin={hideSignin} />
-      <div className="content">{children}</div>
+      {(!user && !loading) || (user && user.verified) ? (
+        <div className="content">{children}</div>
+      ) : (
+        !loading && (
+          <div className="validate-email">
+            <span>{strings.VALIDATE_EMAIL}</span>
+            <Button type="button" variant="contained" size="small" className="btn-primary btn-resend" onClick={handleResend}>
+              {strings.RESEND}
+            </Button>
+          </div>
+        )
+      )}
     </>
   )
 }
