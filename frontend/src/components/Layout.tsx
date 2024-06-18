@@ -18,7 +18,7 @@ interface LayoutProps {
 
 const Layout = ({
   user: masterUser,
-  strict= true,
+  strict,
   hideSignin,
   children,
   onLoad
