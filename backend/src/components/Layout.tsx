@@ -20,7 +20,7 @@ interface LayoutProps {
 
 const Layout = ({
   user: masterUser,
-  strict,
+  strict = true,
   admin,
   hideHeader,
   style,
