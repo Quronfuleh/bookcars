@@ -10,6 +10,6 @@ routes.route(routeNames.update).put(authJwt.verifyToken, supplierController.upda
 routes.route(routeNames.delete).delete(authJwt.verifyToken, supplierController.deleteSupplier)
 routes.route(routeNames.getSupplier).get(authJwt.verifyToken, supplierController.getSupplier)
 routes.route(routeNames.getSuppliers).get(authJwt.verifyToken, supplierController.getSuppliers)
-routes.route(routeNames.getAllSuppliers).get(authJwt.verifyToken, supplierController.getAllSuppliers)
+routes.route(routeNames.getAllSuppliers).get(supplierController.getAllSuppliers)
 
 export default routes
