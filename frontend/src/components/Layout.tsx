@@ -7,7 +7,6 @@ import * as UserService from '../services/UserService'
 import * as helper from '../common/helper'
 import { useInit } from '../common/customHooks'
 import { useAnalytics } from '../common/useAnalytics'
-import Unauthorized from './Unauthorized' // Import Unauthorized component
 
 interface LayoutProps {
   user?: bookcarsTypes.User
@@ -28,7 +27,6 @@ const Layout = ({
 
   const [user, setUser] = useState<bookcarsTypes.User>()
   const [loading, setLoading] = useState(true)
-  const [unauthorized, setUnauthorized] = useState(false) // Add unauthorized state
 
   useEffect(() => {
     if (masterUser && user && user.avatar !== masterUser.avatar) {
@@ -42,6 +40,7 @@ const Layout = ({
         await UserService.signout(false, true)
       } else {
         setLoading(false)
+
         await UserService.signout(false, false)
 
         if (onLoad) {
@@ -61,9 +60,7 @@ const Layout = ({
 
           if (_user) {
             if (_user.blacklisted) {
-              setUser(_user)
-              setUnauthorized(true) // Set unauthorized to true if user is blacklisted
-              setLoading(false)
+              await exit()
               return
             }
 
@@ -109,10 +106,10 @@ const Layout = ({
   return (
     <>
       <Header user={user} hidden={loading} hideSignin={hideSignin} />
-      {((!user && !loading) || (user && user.verified) || !strict) && !unauthorized ? (
+      {(!user && !loading) || (user && user.verified) ? (
         <div className="content">{children}</div>
       ) : (
-        !loading && !unauthorized && (
+        !loading && (
           <div className="validate-email">
             <span>{strings.VALIDATE_EMAIL}</span>
             <Button type="button" variant="contained" size="small" className="btn-primary btn-resend" onClick={handleResend}>
@@ -121,7 +118,6 @@ const Layout = ({
           </div>
         )
       )}
-      {unauthorized && <Unauthorized style={{ marginTop: '75px' }} />} {/* Render Unauthorized component */}
     </>
   )
 }
