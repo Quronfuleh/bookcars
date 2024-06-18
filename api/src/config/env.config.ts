@@ -502,7 +502,6 @@ export interface BookingInfo {
   _additionalDriver?: Types.ObjectId
   cancelRequest?: boolean
   price: number
-  sellingPrice: number
 }
 
 /**

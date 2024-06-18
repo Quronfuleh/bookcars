@@ -85,10 +85,6 @@ const bookingSchema = new Schema<env.Booking>(
       type: Number,
       required: [true, "can't be blank"],
     },
-    sellingPrice: {
-      type: Number,
-      default: 0,
-    },
     cancelRequest: {
       type: Boolean,
       default: false,
