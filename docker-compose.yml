@@ -8,8 +8,8 @@ services:
     restart: always
     ports:
       - 4002:4002
-    depends_on:
-      - mongo
+    # depends_on:
+    #   - mongo
     volumes:
       - cdn:/var/www/cdn/bookcars
 
