@@ -482,6 +482,7 @@ export const update = async (req: Request, res: Response) => {
         fullInsurance,
         additionalDriver,
         price,
+        sellingPrice,
       } = body.booking
 
       const previousStatus = booking.status
@@ -501,6 +502,7 @@ export const update = async (req: Request, res: Response) => {
       booking.fullInsurance = fullInsurance
       booking.additionalDriver = additionalDriver
       booking.price = price as number
+      booking.sellingPrice = sellingPrice as number
 
       if (!additionalDriver && booking._additionalDriver) {
         booking._additionalDriver = undefined
