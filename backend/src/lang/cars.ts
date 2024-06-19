@@ -74,6 +74,11 @@ const strings = new LocalizedStrings({
     PRICE_DAYS_PART_1: 'Prix pour',
     PRICE_DAYS_PART_2: 'jour',
     PRICE_PER_DAY: 'Prix par jour :',
+    AIRPORT_PICKUP: 'Airport pickup',
+    AIRPORT_DROPOFF: 'Airport dropoff',
+    MARKUP_PER_DAY: 'Markup per day',
+    AIRPORT_PICKUP_TOOLTIP:'Pickup from Airport',
+    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport'
   },
   en: {
     NEW_CAR: 'New car',
@@ -146,6 +151,11 @@ const strings = new LocalizedStrings({
     PRICE_DAYS_PART_1: 'Price for',
     PRICE_DAYS_PART_2: 'day',
     PRICE_PER_DAY: 'Price per day:',
+    AIRPORT_PICKUP: 'Airport pickup',
+    AIRPORT_DROPOFF: 'Airport dropoff',
+    MARKUP_PER_DAY: 'Markup per day',
+    AIRPORT_PICKUP_TOOLTIP:'Pickup from Airport',
+    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport'
   },
 })
 

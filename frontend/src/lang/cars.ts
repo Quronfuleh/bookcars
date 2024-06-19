@@ -70,6 +70,10 @@ const strings = new LocalizedStrings({
     LESS_THAN_2500: 'Moins de 2500 DH',
     LESS_THAN_5000: 'Moins de 5000 DH',
     LESS_THAN_7500: 'Moins de 7500 DH',
+    AIRPORT_PICKUP:'Airport pickup',
+    AIRPORT_DROPOFF:'Airport dropoff',
+    AIRPORT_PICKUP_TOOLTIP:'Pickup from Airport',
+    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport'
   },
   en: {
     NEW_CAR: 'New car',
@@ -139,6 +143,10 @@ const strings = new LocalizedStrings({
     LESS_THAN_2500: 'Less than 2500 DH',
     LESS_THAN_5000: 'Less than 5000 DH',
     LESS_THAN_7500: 'Less than 7500 DH',
+    AIRPORT_PICKUP:'Airport pickup',
+    AIRPORT_DROPOFF:'Airport dropoff',
+    AIRPORT_PICKUP_TOOLTIP:'Pickup from Airport',
+    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport'
   },
 })
 

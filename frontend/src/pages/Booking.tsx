@@ -48,6 +48,8 @@ const Booking = () => {
   const [status, setStatus] = useState<bookcarsTypes.BookingStatus>()
   const [cancellation, setCancellation] = useState(false)
   const [amendments, setAmendments] = useState(false)
+  const [airportPickup, setAirportPickup] = useState(false)
+  const [airportDropoff, setAirportDropoff] = useState(false)
   const [theftProtection, setTheftProtection] = useState(false)
   const [collisionDamageWaiver, setCollisionDamageWaiver] = useState(false)
   const [fullInsurance, setFullInsurance] = useState(false)
@@ -132,6 +134,39 @@ const Booking = () => {
       setAmendments(booking.amendments)
     }
   }
+
+  const handleAirportPickupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (booking && booking.car) {
+      booking.airportPickup = e.target.checked;
+  
+      const _price = helper.price(
+        booking.car as bookcarsTypes.Car,
+        new Date(booking.from),
+        new Date(booking.to),
+        booking as bookcarsTypes.CarOptions
+      );
+      setBooking(booking);
+      setPrice(_price);
+      setAirportPickup(booking.airportPickup);
+    }
+  };
+
+  const handleAirportDropoffChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (booking && booking.car) {
+      booking.airportDropoff = e.target.checked;
+  
+      const _price = helper.price(
+        booking.car as bookcarsTypes.Car,
+        new Date(booking.from),
+        new Date(booking.to),
+        booking as bookcarsTypes.CarOptions
+      );
+      setBooking(booking);
+      setPrice(_price);
+      setAirportDropoff(booking.airportDropoff);
+    }
+  };
+  
 
   const handleCollisionDamageWaiverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (booking && booking.car) {
@@ -218,6 +253,8 @@ const Booking = () => {
         status,
         cancellation,
         amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
@@ -281,6 +318,8 @@ const Booking = () => {
             setStatus(_booking.status)
             setCancellation(_booking.cancellation || false)
             setAmendments(_booking.amendments || false)
+            setAirportPickup(_booking.airportPickup || false)
+            setAirportDropoff(_booking.airportDropoff || false)
             setTheftProtection(_booking.theftProtection || false)
             setCollisionDamageWaiver(_booking.collisionDamageWaiver || false)
             setFullInsurance(_booking.fullInsurance || false)
@@ -419,41 +458,60 @@ const Booking = () => {
                 <span>{commonStrings.OPTIONAL}</span>
               </div>
 
-              <FormControl fullWidth margin="dense" className="checkbox-fc">
+              {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
                 <FormControlLabel
                   disabled={!edit || (booking.car as bookcarsTypes.Car).cancellation === -1 || (booking.car as bookcarsTypes.Car).cancellation === 0}
                   control={<Switch checked={cancellation} onChange={handleCancellationChange} color="primary" />}
                   label={csStrings.CANCELLATION}
                   className="checkbox-fcl"
                 />
-              </FormControl>
+              </FormControl> */}
 
-              <FormControl fullWidth margin="dense" className="checkbox-fc">
+              {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
                 <FormControlLabel
                   disabled={!edit || (booking.car as bookcarsTypes.Car).amendments === -1 || (booking.car as bookcarsTypes.Car).amendments === 0}
                   control={<Switch checked={amendments} onChange={handleAmendmentsChange} color="primary" />}
                   label={csStrings.AMENDMENTS}
                   className="checkbox-fcl"
                 />
+              </FormControl> */}
+              <FormControl fullWidth margin="dense" className="checkbox-fc">
+                <FormControlLabel
+                  disabled={!edit || (booking.car as bookcarsTypes.Car).airportPickup === -1 || (booking.car as bookcarsTypes.Car).airportPickup === 0}
+                  control={<Switch checked={airportPickup} onChange={handleAirportPickupChange} color="primary" />}
+                  label={csStrings.AIRPORT_PICKUP}
+                  className="checkbox-fcl"
+                />
               </FormControl>
 
               <FormControl fullWidth margin="dense" className="checkbox-fc">
+                <FormControlLabel
+                  disabled={!edit || (booking.car as bookcarsTypes.Car).airportDropoff === -1 || (booking.car as bookcarsTypes.Car).airportDropoff === 0}
+                  control={<Switch checked={airportDropoff} onChange={handleAirportDropoffChange} color="primary" />}
+                  label={csStrings.AIRPORT_DROPOFF}
+                  className="checkbox-fcl"
+                />
+              </FormControl>
+
+
+
+              {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
                 <FormControlLabel
                   disabled={!edit || (booking.car as bookcarsTypes.Car).collisionDamageWaiver === -1 || (booking.car as bookcarsTypes.Car).collisionDamageWaiver === 0}
                   control={<Switch checked={collisionDamageWaiver} onChange={handleCollisionDamageWaiverChange} color="primary" />}
                   label={csStrings.COLLISION_DAMAGE_WAVER}
                   className="checkbox-fcl"
                 />
-              </FormControl>
+              </FormControl> */}
 
-              <FormControl fullWidth margin="dense" className="checkbox-fc">
+              {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
                 <FormControlLabel
                   disabled={!edit || (booking.car as bookcarsTypes.Car).theftProtection === -1 || (booking.car as bookcarsTypes.Car).theftProtection === 0}
                   control={<Switch checked={theftProtection} onChange={handleTheftProtectionChange} color="primary" />}
                   label={csStrings.THEFT_PROTECTION}
                   className="checkbox-fcl"
                 />
-              </FormControl>
+              </FormControl> */}
 
               <FormControl fullWidth margin="dense" className="checkbox-fc">
                 <FormControlLabel

@@ -113,6 +113,14 @@ const carSchema = new Schema<env.Car>(
       type: Number,
       required: [true, "can't be blank"],
     },
+    airportPickup: {
+      type: Number,
+      required: [true, "can't be blank"],
+    },
+    airportDropoff: {
+      type: Number,
+      required: [true, "can't be blank"],
+    },
   },
   {
     timestamps: true,

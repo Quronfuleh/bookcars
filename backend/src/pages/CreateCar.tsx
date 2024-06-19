@@ -55,6 +55,8 @@ const CreateCar = () => {
   const [fuelPolicy, setFuelPolicy] = useState('')
   const [cancellation, setCancellation] = useState('')
   const [amendments, setAmendments] = useState('')
+  const [airportPickup, setAirportPickup] = useState('')
+  const [airportDropoff, setAirportDropoff] = useState('')
   const [theftProtection, setTheftProtection] = useState('')
   const [collisionDamageWaiver, setCollisionDamageWaiver] = useState('')
   const [fullInsurance, setFullInsurance] = useState('')
@@ -177,6 +179,13 @@ const CreateCar = () => {
     setAmendments(e.target.value)
   }
 
+  const handleAirportPickupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAirportPickup(e.target.value)
+  }
+  const handleAirportDropoffChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAirportDropoff(e.target.value)
+  }
+
   const handleTheftProtectionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTheftProtection(e.target.value)
   }
@@ -230,6 +239,8 @@ const CreateCar = () => {
         mileage: extraToNumber(mileage),
         cancellation: extraToNumber(cancellation),
         amendments: extraToNumber(amendments),
+        airportPickup: extraToNumber(airportPickup),
+        airportDropoff: extraToNumber(airportDropoff),
         theftProtection: extraToNumber(theftProtection),
         collisionDamageWaiver: extraToNumber(collisionDamageWaiver),
         fullInsurance: extraToNumber(fullInsurance),
@@ -389,7 +400,7 @@ const CreateCar = () => {
               />
             </FormControl>
 
-            <FormControl fullWidth margin="dense">
+            {/* <FormControl fullWidth margin="dense">
               <TextField
                 label={`${csStrings.CANCELLATION} (${commonStrings.CURRENCY})`}
                 inputProps={{ inputMode: 'numeric', pattern: '^\\d+(.\\d+)?$' }}
@@ -398,9 +409,9 @@ const CreateCar = () => {
                 autoComplete="off"
                 value={cancellation}
               />
-            </FormControl>
+            </FormControl> */}
 
-            <FormControl fullWidth margin="dense">
+            {/* <FormControl fullWidth margin="dense">
               <TextField
                 label={`${csStrings.AMENDMENTS} (${commonStrings.CURRENCY})`}
                 inputProps={{ inputMode: 'numeric', pattern: '^\\d+(.\\d+)?$' }}
@@ -409,9 +420,30 @@ const CreateCar = () => {
                 autoComplete="off"
                 value={amendments}
               />
+            </FormControl> */}
+            
+            <FormControl fullWidth margin="dense">
+              <TextField
+                label={`${csStrings.AIRPORT_PICKUP} (${commonStrings.CURRENCY})`}
+                inputProps={{ inputMode: 'numeric', pattern: '^\\d+(.\\d+)?$' }}
+                onChange={handleAirportPickupChange}
+                variant="standard"
+                autoComplete="off"
+                value={airportPickup}
+              />
             </FormControl>
 
             <FormControl fullWidth margin="dense">
+              <TextField
+                label={`${csStrings.AIRPORT_DROPOFF} (${commonStrings.CURRENCY})`}
+                inputProps={{ inputMode: 'numeric', pattern: '^\\d+(.\\d+)?$' }}
+                onChange={handleAirportDropoffChange}
+                variant="standard"
+                autoComplete="off"
+                value={airportDropoff}
+              />
+            </FormControl>
+            {/* <FormControl fullWidth margin="dense">
               <TextField
                 label={`${csStrings.THEFT_PROTECTION} (${csStrings.CAR_CURRENCY})`}
                 inputProps={{ inputMode: 'numeric', pattern: '^\\d+(.\\d+)?$' }}
@@ -420,9 +452,9 @@ const CreateCar = () => {
                 autoComplete="off"
                 value={theftProtection}
               />
-            </FormControl>
+            </FormControl> */}
 
-            <FormControl fullWidth margin="dense">
+            {/* <FormControl fullWidth margin="dense">
               <TextField
                 label={`${csStrings.COLLISION_DAMAGE_WAVER} (${csStrings.CAR_CURRENCY})`}
                 inputProps={{ inputMode: 'numeric', pattern: '^\\d+(.\\d+)?$' }}
@@ -431,7 +463,7 @@ const CreateCar = () => {
                 autoComplete="off"
                 value={collisionDamageWaiver}
               />
-            </FormControl>
+            </FormControl> */}
 
             <FormControl fullWidth margin="dense">
               <TextField

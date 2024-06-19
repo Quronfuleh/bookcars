@@ -69,6 +69,14 @@ const bookingSchema = new Schema<env.Booking>(
       type: Boolean,
       default: false,
     },
+    airportPickup: {
+      type: Boolean,
+      default: false,
+    },
+    airportDropoff: {
+      type: Boolean,
+      default: false,
+    },
     fullInsurance: {
       type: Boolean,
       default: false,
@@ -84,6 +92,10 @@ const bookingSchema = new Schema<env.Booking>(
     price: {
       type: Number,
       required: [true, "can't be blank"],
+    },
+    markupPerDay: {
+      type: Number,
+      default: 0,
     },
     cancelRequest: {
       type: Boolean,

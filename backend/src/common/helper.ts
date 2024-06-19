@@ -330,6 +330,26 @@ export const getTheftProtection = (theftProtection: number, language: string) =>
 }
 
 /**
+ * Get markup per day label.
+ *
+ * @param {number} markupPerDay
+ * @param {string} language
+ * @returns {string}
+ */
+export const getMarkupPerDay = (markupPerDay: number, language: string) => {
+  const fr = bookcarsHelper.isFrench(language);
+
+  if (markupPerDay === -1) {
+    return `${strings.MARKUP_PER_DAY}${fr ? ' : ' : ': '}${strings.UNAVAILABLE}`;
+  } 
+  if (markupPerDay === 0) {
+    return `${strings.MARKUP_PER_DAY}${fr ? ' : ' : ': '}${strings.INCLUDED}${fr ? 'e' : ''}`;
+  }
+  return `${strings.MARKUP_PER_DAY}${fr ? ' : ' : ': '}${bookcarsHelper.formatPrice(markupPerDay, commonStrings.CURRENCY, language)}${commonStrings.DAILY}`;
+}
+
+
+/**
  * Get amendments label.
  *
  * @param {number} amendments
@@ -345,6 +365,42 @@ export const getAmendments = (amendments: number, language: string) => {
     return `${strings.AMENDMENTS}${fr ? ' : ' : ': '}${strings.INCLUDED}${fr ? 'es' : ''}`
   }
   return `${strings.AMENDMENTS}${fr ? ' : ' : ': '}${bookcarsHelper.formatPrice(amendments, commonStrings.CURRENCY, language)}`
+}
+
+/**
+ * Get airport pickup label.
+ *
+ * @param {number} pickup
+ * @param {string} language
+ * @returns {string}
+ */
+export const getAirportPickup = (pickup: number, language: string) => {
+  const fr = bookcarsHelper.isFrench(language);
+
+  if (pickup === -1) {
+    return `${strings.AIRPORT_PICKUP}${fr ? ' : ' : ': '}${strings.UNAVAILABLE}${fr ? 's' : ''}`;
+  } if (pickup === 0) {
+    return `${strings.AIRPORT_PICKUP}${fr ? ' : ' : ': '}${strings.INCLUDED}${fr ? 'es' : ''}`;
+  }
+  return `${strings.AIRPORT_PICKUP}${fr ? ' : ' : ': '}${bookcarsHelper.formatPrice(pickup, commonStrings.CURRENCY, language)}`;
+}
+
+/**
+ * Get airport dropoff label.
+ *
+ * @param {number} dropoff
+ * @param {string} language
+ * @returns {string}
+ */
+export const getAirportDropoff = (dropoff: number, language: string) => {
+  const fr = bookcarsHelper.isFrench(language);
+
+  if (dropoff === -1) {
+    return `${strings.AIRPORT_DROPOFF}${fr ? ' : ' : ': '}${strings.UNAVAILABLE}${fr ? 's' : ''}`;
+  } if (dropoff === 0) {
+    return `${strings.AIRPORT_DROPOFF}${fr ? ' : ' : ': '}${strings.INCLUDED}${fr ? 'es' : ''}`;
+  }
+  return `${strings.AIRPORT_DROPOFF}${fr ? ' : ' : ': '}${bookcarsHelper.formatPrice(dropoff, commonStrings.CURRENCY, language)}`;
 }
 
 /**
@@ -471,9 +527,21 @@ export const price = async (
       if (booking.amendments && car.amendments > 0) {
         _price += car.amendments
       }
+      if (booking.airportPickup && car.airportPickup > 0) {
+        _price += car.airportPickup;
+      }
+      if (booking.airportDropoff && car.airportDropoff > 0) {
+        _price += car.airportDropoff;
+      }            
       if (booking.theftProtection && car.theftProtection > 0) {
         _price += car.theftProtection * days
       }
+      const markupPerDay = booking.markupPerDay ?? 0;
+
+      if (markupPerDay > 0) {
+        _price += markupPerDay * days;
+      }
+
       if (booking.collisionDamageWaiver && car.collisionDamageWaiver > 0) {
         _price += car.collisionDamageWaiver * days
       }
@@ -595,6 +663,46 @@ export const getAmendmentsOption = (amendments: number, language: string, hidePl
 }
 
 /**
+ * Get airport pickup option label.
+ *
+ * @param {number} airportPickup
+ * @param {string} language
+ * @param {boolean} hidePlus
+ * @returns {string}
+ */
+export const getAirportPickupOption = (airportPickup: number, language: string, hidePlus: boolean) => {
+  const fr = bookcarsHelper.isFrench(language);
+
+  if (airportPickup === -1) {
+    return `${strings.UNAVAILABLE}${fr ? 's' : ''}`;
+  } if (airportPickup === 0) {
+    return `${strings.INCLUDED}${fr ? 'es' : ''}`;
+  }
+  return `${hidePlus ? '' : '+ '}${bookcarsHelper.formatPrice(airportPickup, commonStrings.CURRENCY, language)}`;
+}
+
+
+/**
+ * Get airport dropoff option label.
+ *
+ * @param {number} airportDropoff
+ * @param {string} language
+ * @param {boolean} hidePlus
+ * @returns {string}
+ */
+export const getAirportDropoffOption = (airportDropoff: number, language: string, hidePlus: boolean) => {
+  const fr = bookcarsHelper.isFrench(language);
+
+  if (airportDropoff === -1) {
+    return `${strings.UNAVAILABLE}${fr ? 's' : ''}`;
+  } if (airportDropoff === 0) {
+    return `${strings.INCLUDED}${fr ? 'es' : ''}`;
+  }
+  return `${hidePlus ? '' : '+ '}${bookcarsHelper.formatPrice(airportDropoff, commonStrings.CURRENCY, language)}`;
+}
+
+
+/**
  * Get collision damage waiver option label.
  *
  * @param {number} collisionDamageWaiver
@@ -633,6 +741,28 @@ export const getTheftProtectionOption = (theftProtection: number, days: number, 
   }
   return `${hidePlus ? '' : '+ '}${bookcarsHelper.formatPrice(theftProtection * days, commonStrings.CURRENCY, language)} (${bookcarsHelper.formatPrice(theftProtection, commonStrings.CURRENCY, language)}${commonStrings.DAILY})`
 }
+
+/**
+ * Get markup per day option label.
+ *
+ * @param {number} markupPerDay
+ * @param {number} days
+ * @param {string} language
+ * @param {boolean} hidePlus
+ * @returns {string}
+ */
+export const getMarkupPerDayOption = (markupPerDay: number, days: number, language: string, hidePlus: boolean) => {
+  const fr = bookcarsHelper.isFrench(language);
+
+  if (markupPerDay === -1) {
+    return strings.UNAVAILABLE;
+  } 
+  if (markupPerDay === 0) {
+    return `${strings.INCLUDED}${fr ? 'e' : ''}`;
+  }
+  return `${hidePlus ? '' : '+ '}${bookcarsHelper.formatPrice(markupPerDay * days, commonStrings.CURRENCY, language)} (${bookcarsHelper.formatPrice(markupPerDay, commonStrings.CURRENCY, language)}${commonStrings.DAILY})`;
+}
+
 
 /**
  * Get full insurance option label.

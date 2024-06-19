@@ -7,7 +7,8 @@ import {
   Switch,
   FormHelperText,
   InputLabel,
-  Input
+  Input,
+  TextField,
 } from '@mui/material'
 import {
   Info as InfoIcon,
@@ -55,7 +56,10 @@ const CreateBooking = () => {
   const [status, setStatus] = useState<bookcarsTypes.BookingStatus>()
   const [cancellation, setCancellation] = useState(false)
   const [amendments, setAmendments] = useState(false)
+  const [airportPickup, setAirportPickup] = useState(false)
+  const [airportDropoff, setAirportDropoff] = useState(false)
   const [theftProtection, setTheftProtection] = useState(false)
+  const [markupPerDay, setMarkupPerDay] = useState<number>(0)
   const [collisionDamageWaiver, setCollisionDamageWaiver] = useState(false)
   const [fullInsurance, setFullInsurance] = useState(false)
   const [additionalDriver, setAdditionalDriver] = useState(false)
@@ -108,10 +112,23 @@ const CreateBooking = () => {
     setAmendments(e.target.checked)
   }
 
+  const handleAirportPickupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAirportPickup(e.target.checked)
+  }
+  const handleAirportDropoffChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAirportDropoff(e.target.checked)
+  }
+
   const handleTheftProtectionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTheftProtection(e.target.checked)
   }
 
+  const handleMarkupPerDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setMarkupPerDay(isNaN(value) ? 0 : value); // Set to 0 if the value is not a valid number
+  };
+  
+  
   const handleCollisionDamageWaiverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCollisionDamageWaiver(e.target.checked)
   }
@@ -204,7 +221,10 @@ const CreateBooking = () => {
       status,
       cancellation,
       amendments,
+      airportPickup,
+      airportDropoff,
       theftProtection,
+      markupPerDay,
       collisionDamageWaiver,
       fullInsurance,
       additionalDriver: additionalDriverSet,
@@ -389,41 +409,78 @@ const CreateBooking = () => {
               <span>{commonStrings.OPTIONAL}</span>
             </div>
 
-            <FormControl fullWidth margin="dense" className="checkbox-fc">
+
+            <FormControl fullWidth margin="dense">
+                <TextField
+                  label={`${csStrings.MARKUP_PER_DAY} (${csStrings.CAR_CURRENCY})`}
+                  inputProps={{
+                    inputMode: 'numeric',
+                    pattern: '^\\d+(.\\d+)?$',
+                  }}
+                  onChange={handleMarkupPerDayChange}
+                  variant="standard"
+                  autoComplete="off"
+                  value={markupPerDay.toString()} // Ensure the value is a string
+                  />
+            </FormControl>
+
+
+            {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
               <FormControlLabel
                 control={<Switch checked={cancellation} onChange={handleCancellationChange} color="primary" />}
                 label={csStrings.CANCELLATION}
                 className="checkbox-fcl"
                 disabled={!helper.carOptionAvailable(car, 'cancellation')}
               />
-            </FormControl>
+            </FormControl> */}
 
-            <FormControl fullWidth margin="dense" className="checkbox-fc">
+            {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
               <FormControlLabel
                 control={<Switch checked={amendments} onChange={handleAmendmentsChange} color="primary" />}
                 label={csStrings.AMENDMENTS}
                 className="checkbox-fcl"
                 disabled={!helper.carOptionAvailable(car, 'amendments')}
               />
+            </FormControl> */}
+            <FormControl fullWidth margin="dense" className="checkbox-fc">
+              <FormControlLabel
+                control={<Switch checked={airportPickup} onChange={handleAirportPickupChange} color="primary" />}
+                label={csStrings.AIRPORT_PICKUP}
+                className="checkbox-fcl"
+                disabled={!helper.carOptionAvailable(car, 'airportPickup')}
+              />
+            </FormControl>
+            <FormControl fullWidth margin="dense" className="checkbox-fc">
+              <FormControlLabel
+                control={<Switch checked={airportDropoff} onChange={handleAirportDropoffChange} color="primary" />}
+                label={csStrings.AIRPORT_DROPOFF}
+                className="checkbox-fcl"
+                disabled={!helper.carOptionAvailable(car, 'airportDropoff')}
+              />
             </FormControl>
 
-            <FormControl fullWidth margin="dense" className="checkbox-fc">
+
+
+
+            {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
               <FormControlLabel
                 control={<Switch checked={theftProtection} onChange={handleTheftProtectionChange} color="primary" />}
                 label={csStrings.THEFT_PROTECTION}
                 className="checkbox-fcl"
                 disabled={!helper.carOptionAvailable(car, 'theftProtection')}
               />
-            </FormControl>
+            </FormControl> */}
 
-            <FormControl fullWidth margin="dense" className="checkbox-fc">
+
+
+            {/* <FormControl fullWidth margin="dense" className="checkbox-fc">
               <FormControlLabel
                 control={<Switch checked={collisionDamageWaiver} onChange={handleCollisionDamageWaiverChange} color="primary" />}
                 label={csStrings.COLLISION_DAMAGE_WAVER}
                 className="checkbox-fcl"
                 disabled={!helper.carOptionAvailable(car, 'collisionDamageWaiver')}
               />
-            </FormControl>
+            </FormControl> */}
 
             <FormControl fullWidth margin="dense" className="checkbox-fc">
               <FormControlLabel

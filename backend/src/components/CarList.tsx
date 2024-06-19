@@ -468,7 +468,27 @@ const CarList = ({
                           </Tooltip>
                         </li>
                       )}
-                      {car.cancellation > -1 && (
+                        {car.airportPickup > -1 && (
+                          <li>
+                            <Tooltip title={booking ? '' : car.airportPickup > -1 ? strings.AIRPORT_PICKUP_TOOLTIP : helper.getAirportPickup(car.airportPickup, language as string)} placement="left">
+                              <div className="car-info-list-item">
+                                {getExtraIcon('airportPickup', car.airportPickup)}
+                                <span className="car-info-list-text">{helper.getAirportPickup(car.airportPickup, language as string)}</span>
+                              </div>
+                            </Tooltip>
+                          </li>
+                        )}
+                        {car.airportDropoff > -1 && (
+                        <li>
+                          <Tooltip title={booking ? '' : car.airportDropoff > -1 ? strings.AIRPORT_DROPOFF_TOOLTIP : helper.getAirportDropoff(car.airportDropoff, language as string)} placement="left">
+                            <div className="car-info-list-item">
+                              {getExtraIcon('airportDropoff', car.airportDropoff)}
+                              <span className="car-info-list-text">{helper.getAirportDropoff(car.airportDropoff, language as string)}</span>
+                            </div>
+                          </Tooltip>
+                        </li>
+                      )}
+                      {/* {car.cancellation > -1 && (
                         <li>
                           <Tooltip title={booking ? '' : car.cancellation > -1 ? strings.CANCELLATION_TOOLTIP : helper.getCancellation(car.cancellation, language as string)} placement="left">
                             <div className="car-info-list-item">
@@ -477,8 +497,8 @@ const CarList = ({
                             </div>
                           </Tooltip>
                         </li>
-                      )}
-                      {car.amendments > -1 && (
+                      )} */}
+                      {/* {car.amendments > -1 && (
                         <li>
                           <Tooltip title={booking ? '' : car.amendments > -1 ? strings.AMENDMENTS_TOOLTIP : helper.getAmendments(car.amendments, language as string)} placement="left">
                             <div className="car-info-list-item">
@@ -487,8 +507,8 @@ const CarList = ({
                             </div>
                           </Tooltip>
                         </li>
-                      )}
-                      {car.collisionDamageWaiver > -1 && (
+                      )} */}
+                      {/* {car.collisionDamageWaiver > -1 && (
                         <li>
                           <Tooltip
                             title={
@@ -502,8 +522,8 @@ const CarList = ({
                             </div>
                           </Tooltip>
                         </li>
-                      )}
-                      {car.theftProtection > -1 && (
+                      )} */}
+                      {/* {car.theftProtection > -1 && (
                         <li>
                           <Tooltip
                             title={booking ? '' : car.theftProtection > -1 ? strings.THEFT_PROTECTION_TOOLTIP : helper.getTheftProtection(car.theftProtection, language as string)}
@@ -515,7 +535,7 @@ const CarList = ({
                             </div>
                           </Tooltip>
                         </li>
-                      )}
+                      )} */}
                       {car.fullInsurance > -1 && (
                         <li>
                           <Tooltip title={booking ? '' : car.fullInsurance > -1 ? strings.FULL_INSURANCE_TOOLTIP : helper.getFullInsurance(car.fullInsurance, language as string)} placement="left">

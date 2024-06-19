@@ -96,6 +96,8 @@ export const update = async (req: Request, res: Response) => {
         collisionDamageWaiver,
         fullInsurance,
         additionalDriver,
+        airportPickup,
+        airportDropoff,
       } = body
 
       car.supplier = new mongoose.Types.ObjectId(supplier)
@@ -118,6 +120,8 @@ export const update = async (req: Request, res: Response) => {
       car.collisionDamageWaiver = collisionDamageWaiver
       car.fullInsurance = fullInsurance
       car.additionalDriver = additionalDriver
+      car.airportDropoff = airportDropoff
+      car.airportPickup = airportPickup
 
       await car.save()
       return res.json(car)

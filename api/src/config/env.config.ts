@@ -406,10 +406,13 @@ export interface Booking extends Document {
   _additionalDriver?: Types.ObjectId
   cancelRequest?: boolean
   price: number
+  markupPerDay: number
   sessionId?: string
   paymentIntentId?: string
   customerId?: string
   expireAt?: Date
+  airportPickup?: boolean
+  airportDropoff?: boolean
 }
 
 /**
@@ -442,6 +445,8 @@ export interface Car extends Document {
   collisionDamageWaiver: number
   fullInsurance: number
   additionalDriver: number
+  airportPickup: number
+  airportDropoff: number
 }
 
 /**
@@ -474,6 +479,8 @@ export interface CarInfo {
   collisionDamageWaiver: number
   fullInsurance: number
   additionalDriver: number
+  airportPickup: number
+  airportDropoff: number
 }
 
 /**
@@ -502,6 +509,9 @@ export interface BookingInfo {
   _additionalDriver?: Types.ObjectId
   cancelRequest?: boolean
   price: number
+  markupPerDay: number
+  airportPickup?: boolean
+  airportDropoff?: boolean
 }
 
 /**

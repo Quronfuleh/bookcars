@@ -88,6 +88,8 @@ const Checkout = () => {
   const [phoneInfo, setPhoneInfo] = useState(true)
   const [cancellation, setCancellation] = useState(false)
   const [amendments, setAmendments] = useState(false)
+  const [airportPickup, setAirportPickup] = useState(false)
+  const [airportDropoff, setAirportDropoff] = useState(false)
   const [theftProtection, setTheftProtection] = useState(false)
   const [collisionDamageWaiver, setCollisionDamageWaiver] = useState(false)
   const [fullInsurance, setFullInsurance] = useState(false)
@@ -129,6 +131,8 @@ const Checkout = () => {
       const options: bookcarsTypes.CarOptions = {
         cancellation: _cancellation,
         amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
@@ -159,12 +163,54 @@ const Checkout = () => {
     }
   }
 
+  const handleAirportPickupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (car && from && to) {
+      const _airportPickup = e.target.checked;
+      const options: bookcarsTypes.CarOptions = {
+        cancellation,
+        amendments,
+        theftProtection,
+        collisionDamageWaiver,
+        fullInsurance,
+        additionalDriver,
+        airportPickup: _airportPickup,
+        airportDropoff,
+      };
+      const _price = helper.price(car, from, to, options);
+
+      setAirportPickup(_airportPickup);
+      setPrice(_price);
+    }
+  };
+
+  const handleAirportDropoffChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (car && from && to) {
+      const _airportDropoff = e.target.checked;
+      const options: bookcarsTypes.CarOptions = {
+        cancellation,
+        amendments,
+        theftProtection,
+        collisionDamageWaiver,
+        fullInsurance,
+        additionalDriver,
+        airportPickup,
+        airportDropoff: _airportDropoff,
+      };
+      const _price = helper.price(car, from, to, options);
+
+      setAirportDropoff(_airportDropoff);
+      setPrice(_price);
+    }
+  };
+
   const handleTheftProtectionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (car && from && to) {
       const _theftProtection = e.target.checked
       const options: bookcarsTypes.CarOptions = {
         cancellation,
         amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection: _theftProtection,
         collisionDamageWaiver,
         fullInsurance,
@@ -183,6 +229,8 @@ const Checkout = () => {
       const options: bookcarsTypes.CarOptions = {
         cancellation,
         amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection,
         collisionDamageWaiver: _collisionDamageWaiver,
         fullInsurance,
@@ -201,6 +249,8 @@ const Checkout = () => {
       const options: bookcarsTypes.CarOptions = {
         cancellation,
         amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection,
         collisionDamageWaiver,
         fullInsurance: _fullInsurance,
@@ -219,6 +269,8 @@ const Checkout = () => {
       const options: bookcarsTypes.CarOptions = {
         cancellation,
         amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
@@ -465,6 +517,8 @@ const Checkout = () => {
         status: bookcarsTypes.BookingStatus.Pending,
         cancellation,
         amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
@@ -596,6 +650,8 @@ const Checkout = () => {
       setTo(_to)
       setCancellation(included(_car.cancellation))
       setAmendments(included(_car.amendments))
+      setAirportPickup(included(_car.airportPickup))
+      setAirportDropoff(included(_car.airportDropoff))
       setTheftProtection(included(_car.theftProtection))
       setCollisionDamageWaiver(included(_car.collisionDamageWaiver))
       setFullInsurance(included(_car.fullInsurance))
@@ -631,7 +687,7 @@ const Checkout = () => {
                       <span>{strings.BOOKING_OPTIONS}</span>
                     </div>
                     <div className="booking-options">
-                      <FormControl fullWidth margin="dense">
+                      {/* <FormControl fullWidth margin="dense">
                         <FormControlLabel
                           disabled={car.cancellation === -1 || car.cancellation === 0 || !!clientSecret}
                           control={<Switch checked={cancellation} onChange={handleCancellationChange} color="primary" />}
@@ -642,9 +698,36 @@ const Checkout = () => {
                             </span>
                           )}
                         />
+                      </FormControl> */}
+
+                      <FormControl fullWidth margin="dense">
+                        <FormControlLabel
+                          disabled={car.airportPickup === -1 || car.airportPickup === 0 || !!clientSecret}
+                          control={<Switch checked={airportPickup} onChange={handleAirportPickupChange} color="primary" />}
+                          label={(
+                            <span>
+                              <span className="booking-option-label">{csStrings.AIRPORT_PICKUP}</span>
+                              <span className="booking-option-value">{helper.getAirportPickupOption(car.airportPickup, language)}</span>
+                            </span>
+                          )}
+                        />
                       </FormControl>
 
                       <FormControl fullWidth margin="dense">
+                        <FormControlLabel
+                          disabled={car.airportDropoff === -1 || car.airportDropoff === 0 || !!clientSecret}
+                          control={<Switch checked={airportDropoff} onChange={handleAirportDropoffChange} color="primary" />}
+                          label={(
+                            <span>
+                              <span className="booking-option-label">{csStrings.AIRPORT_DROPOFF}</span>
+                              <span className="booking-option-value">{helper.getAirportDropoffOption(car.airportDropoff, language)}</span>
+                            </span>
+                          )}
+                        />
+                      </FormControl>
+
+
+                      {/* <FormControl fullWidth margin="dense">
                         <FormControlLabel
                           disabled={car.amendments === -1 || car.amendments === 0 || !!clientSecret}
                           control={<Switch checked={amendments} onChange={handleAmendmentsChange} color="primary" />}
@@ -655,9 +738,9 @@ const Checkout = () => {
                             </span>
                           )}
                         />
-                      </FormControl>
+                      </FormControl> */}
 
-                      <FormControl fullWidth margin="dense">
+                      {/* <FormControl fullWidth margin="dense">
                         <FormControlLabel
                           disabled={car.collisionDamageWaiver === -1 || car.collisionDamageWaiver === 0 || !!clientSecret}
                           control={<Switch checked={collisionDamageWaiver} onChange={handleCollisionDamageWaiverChange} color="primary" />}
@@ -668,9 +751,9 @@ const Checkout = () => {
                             </span>
                           )}
                         />
-                      </FormControl>
+                      </FormControl> */}
 
-                      <FormControl fullWidth margin="dense">
+                      {/* <FormControl fullWidth margin="dense">
                         <FormControlLabel
                           disabled={car.theftProtection === -1 || car.theftProtection === 0 || !!clientSecret}
                           control={<Switch checked={theftProtection} onChange={handleTheftProtectionChange} color="primary" />}
@@ -681,7 +764,7 @@ const Checkout = () => {
                             </span>
                           )}
                         />
-                      </FormControl>
+                      </FormControl> */}
 
                       <FormControl fullWidth margin="dense">
                         <FormControlLabel

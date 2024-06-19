@@ -99,6 +99,8 @@ describe('POST /api/create-car', () => {
       mileage: -1,
       cancellation: 0,
       amendments: 0,
+      airportDropoff: 0,
+      airportPickup: 0,
       theftProtection: 90,
       collisionDamageWaiver: 120,
       fullInsurance: 200,
@@ -157,6 +159,8 @@ describe('PUT /api/update-car', () => {
       mileage: 30000,
       cancellation: 70,
       amendments: 30,
+      airportDropoff: 10,
+      airportPickup: 10,
       theftProtection: 100,
       collisionDamageWaiver: 130,
       fullInsurance: 210,
@@ -184,6 +188,8 @@ describe('PUT /api/update-car', () => {
     expect(car.mileage).toBe(30000)
     expect(car.cancellation).toBe(70)
     expect(car.amendments).toBe(30)
+    expect(car.airportPickup).toBe(10)
+    expect(car.airportDropoff).toBe(10)
     expect(car.theftProtection).toBe(100)
     expect(car.collisionDamageWaiver).toBe(130)
     expect(car.fullInsurance).toBe(210)
@@ -566,6 +572,8 @@ describe('GET /api/check-car/:id', () => {
       status: bookcarsTypes.BookingStatus.Pending,
       cancellation: true,
       amendments: true,
+      airportDropoff: true,
+      airportPickup: true,
       theftProtection: false,
       collisionDamageWaiver: false,
       fullInsurance: false,
@@ -620,6 +628,8 @@ describe('DELETE /api/delete-car/:id', () => {
       mileage: -1,
       cancellation: 0,
       amendments: 0,
+      airportDropoff: 0,
+      airportPickup: 0,
       theftProtection: 90,
       collisionDamageWaiver: 120,
       fullInsurance: 200,
@@ -649,6 +659,8 @@ describe('DELETE /api/delete-car/:id', () => {
       mileage: -1,
       cancellation: 0,
       amendments: 0,
+      airportDropoff: 0,
+      airportPickup: 0,
       theftProtection: 90,
       collisionDamageWaiver: 120,
       fullInsurance: 200,

@@ -74,10 +74,13 @@ export interface Booking {
   _additionalDriver?: string | AdditionalDriver
   cancelRequest?: boolean
   price?: number
+  markupPerDay?: number
   sessionId?: string
   paymentIntentId?: string
   customerId?: string
   expireAt?: Date
+  airportPickup?: boolean
+  airportDropoff?: boolean
 }
 
 export interface CheckoutPayload {
@@ -155,6 +158,8 @@ export interface CreateCarPayload {
   collisionDamageWaiver: number
   fullInsurance: number
   additionalDriver: number
+  airportPickup: number
+  airportDropoff: number
 }
 
 export interface UpdateCarPayload extends CreateCarPayload {
@@ -321,6 +326,8 @@ export interface Car {
   mileage: number
   cancellation: number
   amendments: number
+  airportPickup: number
+  airportDropoff: number
   theftProtection: number
   collisionDamageWaiver: number
   fullInsurance: number
@@ -418,6 +425,8 @@ export type CarFilterSubmitEvent = (filter: CarFilter) => void
 export interface CarOptions {
   cancellation?: boolean
   amendments?: boolean
+  airportPickup?: boolean
+  airportDropoff?: boolean
   theftProtection?: boolean
   collisionDamageWaiver?: boolean
   fullInsurance?: boolean

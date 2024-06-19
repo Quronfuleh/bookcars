@@ -266,31 +266,48 @@ const Car = () => {
                       </div>
                     </Tooltip>
                   </li>
-                  <li>
+                  {/* <li>
                     <Tooltip title={car.cancellation > -1 ? strings.CANCELLATION_TOOLTIP : helper.getCancellation(car.cancellation, language)} placement="left">
                       <div className="car-info-list-item">
                         {car.cancellation > -1 ? <CheckIcon /> : <UncheckIcon />}
                         <span className="car-info-list-text">{helper.getCancellation(car.cancellation, language)}</span>
                       </div>
                     </Tooltip>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <Tooltip title={car.amendments > -1 ? strings.AMENDMENTS_TOOLTIP : helper.getAmendments(car.amendments, language)} placement="left">
                       <div className="car-info-list-item">
                         {car.amendments > -1 ? <CheckIcon /> : <UncheckIcon />}
                         <span className="car-info-list-text">{helper.getAmendments(car.amendments, language)}</span>
                       </div>
                     </Tooltip>
+                  </li> */}
+                  <li>
+                    <Tooltip title={car.airportPickup > -1 ? strings.AIRPORT_PICKUP_TOOLTIP : helper.getAirportPickup(car.airportPickup, language)} placement="left">
+                      <div className="car-info-list-item">
+                        {car.airportPickup > -1 ? <CheckIcon /> : <UncheckIcon />}
+                        <span className="car-info-list-text">{helper.getAirportPickup(car.airportPickup, language)}</span>
+                      </div>
+                    </Tooltip>
                   </li>
                   <li>
+                    <Tooltip title={car.airportDropoff > -1 ? strings.AIRPORT_DROPOFF_TOOLTIP : helper.getAirportDropoff(car.airportDropoff, language)} placement="left">
+                      <div className="car-info-list-item">
+                        {car.airportDropoff > -1 ? <CheckIcon /> : <UncheckIcon />}
+                        <span className="car-info-list-text">{helper.getAirportDropoff(car.airportDropoff, language)}</span>
+                      </div>
+                    </Tooltip>
+                  </li>
+
+                  {/* <li>
                     <Tooltip title={car.theftProtection > -1 ? strings.THEFT_PROTECTION_TOOLTIP : helper.getTheftProtection(car.theftProtection, language)} placement="left">
                       <div className="car-info-list-item">
                         {car.theftProtection > -1 ? <CheckIcon /> : <UncheckIcon />}
                         <span className="car-info-list-text">{helper.getTheftProtection(car.theftProtection, language)}</span>
                       </div>
                     </Tooltip>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <Tooltip
                       title={car.collisionDamageWaiver > -1 ? strings.COLLISION_DAMAGE_WAVER_TOOLTIP : helper.getCollisionDamageWaiver(car.collisionDamageWaiver, language)}
                       placement="left"
@@ -300,7 +317,7 @@ const Car = () => {
                         <span className="car-info-list-text">{helper.getCollisionDamageWaiver(car.collisionDamageWaiver, language)}</span>
                       </div>
                     </Tooltip>
-                  </li>
+                  </li> */}
                   <li>
                     <Tooltip title={car.fullInsurance > -1 ? strings.FULL_INSURANCE_TOOLTIP : helper.getFullInsurance(car.fullInsurance, language)} placement="left">
                       <div className="car-info-list-item">

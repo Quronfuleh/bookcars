@@ -477,11 +477,14 @@ export const update = async (req: Request, res: Response) => {
         status,
         cancellation,
         amendments,
+        markupPerDay,
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
         additionalDriver,
         price,
+        airportPickup,
+        airportDropoff,
       } = body.booking
 
       const previousStatus = booking.status
@@ -496,10 +499,13 @@ export const update = async (req: Request, res: Response) => {
       booking.status = status
       booking.cancellation = cancellation
       booking.amendments = amendments
+      booking.markupPerDay = markupPerDay ?? 0; // Use nullish coalescing to default to 0 if undefined
       booking.theftProtection = theftProtection
       booking.collisionDamageWaiver = collisionDamageWaiver
       booking.fullInsurance = fullInsurance
       booking.additionalDriver = additionalDriver
+      booking.airportDropoff = airportDropoff
+      booking.airportPickup = airportPickup
       booking.price = price as number
 
       if (!additionalDriver && booking._additionalDriver) {
