@@ -282,7 +282,7 @@ const Header = ({
       <div style={classes.grow} className="header">
         <AppBar position="fixed" sx={{ bgcolor: '#fff', boxShadow: 'none', borderBottom: '1px solid #ddd' }}>
           <Toolbar className="toolbar">
-            {isLoaded && !loading && (
+            {isLoaded && !loading && isSignedIn && (
               <>
                 <IconButton edge="start" sx={classes.menuButton} aria-label="open drawer" onClick={handleSideMenuOpen}>
                   <MenuIcon />

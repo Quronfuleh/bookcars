@@ -34,6 +34,7 @@ const Search = () => {
   const [gearbox, setGearbox] = useState([bookcarsTypes.GearboxType.Automatic, bookcarsTypes.GearboxType.Manual])
   const [mileage, setMileage] = useState([bookcarsTypes.Mileage.Limited, bookcarsTypes.Mileage.Unlimited])
   const [deposit, setDeposit] = useState(-1)
+  
 
   const handleSupplierFilterChange = (newSuppliers: string[]) => {
     setSuppliers(newSuppliers)
@@ -122,7 +123,7 @@ const Search = () => {
   }
 
   return (
-    <Layout onLoad={onLoad} strict={false}>
+    <Layout onLoad={onLoad} strict={true}>
       {visible && suppliers && pickupLocation && dropOffLocation && from && to && (
         <div className="cars">
           <div className="col-1">

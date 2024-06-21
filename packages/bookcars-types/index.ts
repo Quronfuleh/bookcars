@@ -195,6 +195,7 @@ export interface CreateUserPayload {
   phone: string
   location: string
   bio: string
+  markup?: number
   fullName: string
   type?: string
   avatar?: string
@@ -280,6 +281,7 @@ export interface User {
   enableEmailNotifications?: boolean
   avatar?: string
   bio?: string
+  markup?: number
   location?: string
   type?: string
   blacklisted?: boolean

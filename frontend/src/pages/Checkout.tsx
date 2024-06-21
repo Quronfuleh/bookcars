@@ -13,6 +13,7 @@ import {
   FormControlLabel,
   Switch,
   RadioGroup,
+  TextField,
   Radio,
   CircularProgress
 } from '@mui/material'
@@ -90,6 +91,7 @@ const Checkout = () => {
   const [amendments, setAmendments] = useState(false)
   const [airportPickup, setAirportPickup] = useState(false)
   const [airportDropoff, setAirportDropoff] = useState(false)
+  const [setMarkupPerDay] = useState<number>(0)
   const [theftProtection, setTheftProtection] = useState(false)
   const [collisionDamageWaiver, setCollisionDamageWaiver] = useState(false)
   const [fullInsurance, setFullInsurance] = useState(false)
@@ -113,6 +115,8 @@ const Checkout = () => {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [bookingId, setBookingId] = useState<string>()
   const [sessionId, setSessionId] = useState<string>()
+  const userMarkup = user?.markup || 0
+  const markupPerDay = userMarkup
 
   const _fr = language === 'fr'
   const _locale = _fr ? fr : enUS
@@ -138,7 +142,7 @@ const Checkout = () => {
         fullInsurance,
         additionalDriver,
       }
-      const _price = helper.price(car, from, to, options)
+      const _price = helper.price(car, from, to, options, markupPerDay)
 
       setCancellation(_cancellation)
       setPrice(_price)
@@ -151,12 +155,14 @@ const Checkout = () => {
       const options: bookcarsTypes.CarOptions = {
         cancellation,
         amendments: _amendments,
+        airportPickup,
+        airportDropoff,
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
         additionalDriver,
       }
-      const _price = helper.price(car, from, to, options)
+      const _price = helper.price(car, from, to, options,markupPerDay)
 
       setAmendments(_amendments)
       setPrice(_price)
@@ -176,7 +182,7 @@ const Checkout = () => {
         airportPickup: _airportPickup,
         airportDropoff,
       };
-      const _price = helper.price(car, from, to, options);
+      const _price = helper.price(car, from, to, options, markupPerDay);
 
       setAirportPickup(_airportPickup);
       setPrice(_price);
@@ -196,12 +202,33 @@ const Checkout = () => {
         airportPickup,
         airportDropoff: _airportDropoff,
       };
-      const _price = helper.price(car, from, to, options);
+      const _price = helper.price(car, from, to, options, markupPerDay);
 
       setAirportDropoff(_airportDropoff);
       setPrice(_price);
     }
   };
+
+  // const handleMarkupPerDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (car && from && to) {
+  //     const markupPerDay = parseFloat(e.target.value) || 0;
+  //     const options: bookcarsTypes.CarOptions = {
+  //       cancellation,
+  //       amendments,
+  //       airportPickup,
+  //       airportDropoff,
+  //       theftProtection,
+  //       collisionDamageWaiver,
+  //       fullInsurance,
+  //       additionalDriver,
+  //     };
+  //     const _price = helper.price(car, from, to, options,markupPerDay);
+  
+  //     setMarkupPerDay(markupPerDay);
+  //     setPrice(_price);
+  //   }
+  // };
+  
 
   const handleTheftProtectionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (car && from && to) {
@@ -216,7 +243,7 @@ const Checkout = () => {
         fullInsurance,
         additionalDriver,
       }
-      const _price = helper.price(car, from, to, options)
+      const _price = helper.price(car, from, to, options, markupPerDay)
 
       setTheftProtection(_theftProtection)
       setPrice(_price)
@@ -236,7 +263,7 @@ const Checkout = () => {
         fullInsurance,
         additionalDriver,
       }
-      const _price = helper.price(car, from, to, options)
+      const _price = helper.price(car, from, to, options, markupPerDay)
 
       setCollisionDamageWaiver(_collisionDamageWaiver)
       setPrice(_price)
@@ -256,7 +283,7 @@ const Checkout = () => {
         fullInsurance: _fullInsurance,
         additionalDriver,
       }
-      const _price = helper.price(car, from, to, options)
+      const _price = helper.price(car, from, to, options, markupPerDay)
 
       setFullInsurance(_fullInsurance)
       setPrice(_price)
@@ -276,7 +303,7 @@ const Checkout = () => {
         fullInsurance,
         additionalDriver: _additionalDriver,
       }
-      const _price = helper.price(car, from, to, options)
+      const _price = helper.price(car, from, to, options, markupPerDay)
 
       setAdditionalDriver(_additionalDriver)
       setPrice(_price)
@@ -519,6 +546,7 @@ const Checkout = () => {
         amendments,
         airportPickup,
         airportDropoff,
+        markupPerDay, 
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
@@ -638,7 +666,7 @@ const Checkout = () => {
         return
       }
 
-      const _price = helper.price(_car, _from, _to)
+      const _price = helper.price(_car, _from, _to,undefined, _user?.markup)
 
       const included = (val: number) => val === 0
 
@@ -650,6 +678,7 @@ const Checkout = () => {
       setTo(_to)
       setCancellation(included(_car.cancellation))
       setAmendments(included(_car.amendments))
+      // setMarkupPerDay(markupPerDay)
       setAirportPickup(included(_car.airportPickup))
       setAirportDropoff(included(_car.airportDropoff))
       setTheftProtection(included(_car.theftProtection))
@@ -814,9 +843,28 @@ const Checkout = () => {
                         <span className="booking-detail-title">{commonStrings.DROP_OFF_LOCATION}</span>
                         <div className="booking-detail-value">{dropOffLocation.name}</div>
                       </div>
+                      {/* <div className="booking-detail">
+                        <FormControl fullWidth margin="dense" className="booking-detail">
+                          <TextField
+                            label={`${csStrings.MARKUP_PER_DAY} (${csStrings.CAR_CURRENCY})`}
+                            InputLabelProps={{
+                              className: "booking-detail-title"  // Applying the title class to the label
+                            }}
+                            inputProps={{
+                              inputMode: 'numeric',
+                              pattern: '^\\d+(.\\d+)?$',
+                            }}
+                            onChange={handleMarkupPerDayChange}
+                            variant="standard"
+                            autoComplete="off"
+                            value={markupPerDay.toString()} // Ensure the value is a string
+                            className="booking-detail-value" // Using the same class for consistency in styling
+                          />
+                        </FormControl>
+                      </div> */}
                       <div className="booking-detail" style={{ height: bookingDetailHeight }}>
                         <span className="booking-detail-title">{strings.CAR}</span>
-                        <div className="booking-detail-value">{`${car.name} (${bookcarsHelper.formatPrice(car.price, commonStrings.CURRENCY, language)}${commonStrings.DAILY})`}</div>
+                        <div className="booking-detail-value">{`${car.name} (${bookcarsHelper.formatPrice(car.price + markupPerDay, commonStrings.CURRENCY, language)}${commonStrings.DAILY})`}</div>
                       </div>
                       <div className="booking-detail" style={{ height: bookingDetailHeight }}>
                         <span className="booking-detail-title">{commonStrings.SUPPLIER}</span>
@@ -1027,7 +1075,7 @@ const Checkout = () => {
                                 </span>
                               )}
                             />
-                            <FormControlLabel
+                            {/* <FormControlLabel
                               value="payOnline"
                               control={<Radio />}
                               label={(
@@ -1036,7 +1084,7 @@ const Checkout = () => {
                                   <span className="payment-info">{`(${strings.PAY_ONLINE_INFO})`}</span>
                                 </span>
                               )}
-                            />
+                            /> */}
                           </RadioGroup>
                         </FormControl>
                       </div>

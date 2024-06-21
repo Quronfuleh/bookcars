@@ -77,6 +77,10 @@ const userSchema = new Schema<env.User>(
       type: String,
       trim: true,
     },
+    markup: {
+      type: Number,
+      default: 0,
+    },
     location: {
       type: String,
       trim: true,

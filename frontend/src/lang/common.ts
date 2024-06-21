@@ -79,6 +79,8 @@ const strings = new LocalizedStrings({
     OPTIONS: 'Options',
     VIEW: 'Consulter',
     OF: 'sur',
+    MARKUP:'markup',
+
   },
   en: {
     GENERIC_ERROR: 'An unhandled error occurred.',
@@ -156,6 +158,7 @@ const strings = new LocalizedStrings({
     OPTIONS: 'Options',
     VIEW: 'View',
     OF: 'of',
+    MARKUP:'markup',
   },
 })
 

@@ -102,9 +102,13 @@ export const signin = (data: bookcarsTypes.SignInPayload): Promise<{ status: num
       { withCredentials: true }
     )
     .then((res) => {
-      localStorage.setItem('bc-user', JSON.stringify(res.data))
-      return { status: res.status, data: res.data }
-    })
+      // Assuming 'markup' is part of the response data under user details
+      if (res.data && res.data.user) {
+          localStorage.setItem('bc-user', JSON.stringify(res.data.user));
+      }
+      return { status: res.status, data: res.data.user };
+    });
+
 
 /**
  * Sign out.
@@ -290,7 +294,17 @@ export const updateUser = (data: bookcarsTypes.UpdateUserPayload): Promise<numbe
       data,
       { withCredentials: true }
     )
-    .then((res) => res.status)
+    .then((res) => {
+        if (res.status === 200) {
+            const updatedUser = getCurrentUser();
+            if (updatedUser) {
+                updatedUser.markup = data.markup;  // Assuming 'markup' might be part of the update payload
+                localStorage.setItem('bc-user', JSON.stringify(updatedUser));
+            }
+        }
+        return res.status;
+    });
+
 
 /**
  * Update email notifications flag.

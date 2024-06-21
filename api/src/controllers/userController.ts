@@ -807,6 +807,7 @@ export const update = async (req: Request, res: Response) => {
       fullName,
       phone,
       bio,
+      markup,
       location,
       type,
       birthDate,
@@ -820,6 +821,7 @@ export const update = async (req: Request, res: Response) => {
     user.phone = phone
     user.location = location
     user.bio = bio
+    user.markup = markup
     user.birthDate = birthDate ? new Date(birthDate) : undefined
     if (type) {
       user.type = type as bookcarsTypes.UserType
@@ -935,6 +937,7 @@ export const getUser = async (req: Request, res: Response) => {
       enableEmailNotifications: 1,
       avatar: 1,
       bio: 1,
+      markup: 1,
       location: 1,
       type: 1,
       blacklisted: 1,
@@ -1239,6 +1242,7 @@ export const getUsers = async (req: Request, res: Response) => {
             enableEmailNotifications: 1,
             avatar: 1,
             bio: 1,
+            markup: 1,
             location: 1,
             type: 1,
             blacklisted: 1,

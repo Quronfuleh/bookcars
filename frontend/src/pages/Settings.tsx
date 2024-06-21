@@ -40,6 +40,8 @@ const Settings = () => {
   const [birthDateValid, setBirthDateValid] = useState(true)
   const [phoneValid, setPhoneValid] = useState(true)
   const [enableEmailNotifications, setEnableEmailNotifications] = useState(false)
+  const [markup, setMarkup] = useState<number>(0)
+
 
   const handleFullNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFullName(e.target.value)
@@ -82,6 +84,13 @@ const Settings = () => {
     setLocation(e.target.value)
   }
 
+
+  const handleMarkupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value === '' ? 0 : Number(e.target.value);
+    setMarkup(value);
+  };
+  
+  
   const handleBioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBio(e.target.value)
   }
@@ -146,6 +155,7 @@ const Settings = () => {
         phone,
         location,
         bio,
+        markup,
       }
 
       const status = await UserService.updateUser(data)
@@ -168,6 +178,7 @@ const Settings = () => {
       setBirthDate(_user && _user.birthDate ? new Date(_user.birthDate) : undefined)
       setLocation(_user.location || '')
       setBio(_user.bio || '')
+      setMarkup(_user.markup || 0)
       setEnableEmailNotifications(_user.enableEmailNotifications ?? true)
       setVisible(true)
       setLoading(false)
@@ -178,7 +189,7 @@ const Settings = () => {
     <Layout onLoad={onLoad} user={user} strict>
       {visible && user && (
         <div className="settings">
-          <Paper className="settings-form settings-form-wrapper" elevation={10}>
+          <Paper className="settings-form settings-form-wrapper" elevation={30}>
             <form onSubmit={handleSubmit}>
               <Avatar
                 loggedUser={user}
@@ -229,6 +240,18 @@ const Settings = () => {
                 <InputLabel>{commonStrings.BIO}</InputLabel>
                 <Input id="bio" type="text" onChange={handleBioChange} autoComplete="off" value={bio} />
               </FormControl>
+
+              <FormControl fullWidth margin="dense">
+                <InputLabel>{commonStrings.MARKUP}</InputLabel>
+                <Input 
+                  id="markup"
+                  type="number"
+                  onChange={handleMarkupChange}
+                  autoComplete="off"
+                  value={markup.toString()}  // Convert number to string for rendering
+                />
+              </FormControl>
+
               <div className="buttons">
                 <Button
                   type="submit"

@@ -471,7 +471,7 @@ export const getBookingStatuses = (): bookcarsTypes.StatusFilterItem[] => [
  * @param {?bookcarsTypes.CarOptions} [options]
  * @returns {number}
  */
-export const price = (car: bookcarsTypes.Car, from: Date, to: Date, options?: bookcarsTypes.CarOptions) => {
+export const price = (car: bookcarsTypes.Car, from: Date, to: Date, options?: bookcarsTypes.CarOptions, markupPerDay?: number ) => {
   const _days = bookcarsHelper.days(from, to)
 
   let _price = car.price * _days
@@ -500,6 +500,14 @@ export const price = (car: bookcarsTypes.Car, from: Date, to: Date, options?: bo
     if (options.additionalDriver && car.additionalDriver > 0) {
       _price += car.additionalDriver * _days
     }
+
+  }
+
+  if (markupPerDay){
+    if(markupPerDay > 0){
+    _price += markupPerDay * _days
+  }
+  
   }
 
   return _price

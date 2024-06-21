@@ -84,10 +84,27 @@ const CarList = ({
   const [totalRecords, setTotalRecords] = useState(0)
   const [page, setPage] = useState(1)
   const [days, setDays] = useState(0)
+  const [userMarkup, setUserMarkup] = useState<number>(0);
+  const [user, setUser] = useState<bookcarsTypes.User | null>(null);
+
+
+
+
+  useEffect(() => {
+    const currentUser = UserService.getCurrentUser();
+    // console.log("Fetched User:", currentUser); // This will show what you get from getCurrentUser
+    setUser(currentUser);
+    if (currentUser) {
+      // console.log("User Markup:", currentUser.markup); // Check what the markup value is
+      setUserMarkup(currentUser.markup || 0); // See if this line is reached with correct data
+    }
+  }, []);
+  
 
   useEffect(() => {
     setLanguage(UserService.getLanguage())
   }, [])
+
 
   useEffect(() => {
     if (from && to) {
@@ -169,6 +186,7 @@ const CarList = ({
     }
   }
 
+
   useEffect(() => {
     if (suppliers) {
       if (suppliers.length > 0) {
@@ -238,6 +256,7 @@ const CarList = ({
   }
 
   const fr = language === 'fr'
+
 
   return (
     <>
@@ -429,8 +448,8 @@ const CarList = ({
               {!hidePrice && (
                 <div className="price">
                   <span className="price-days">{helper.getDays(days)}</span>
-                  <span className="price-main">{bookcarsHelper.formatPrice(helper.price(car, from as Date, to as Date), commonStrings.CURRENCY, language)}</span>
-                  <span className="price-day">{`${strings.PRICE_PER_DAY} ${bookcarsHelper.formatPrice(car.price, commonStrings.CURRENCY, language)}`}</span>
+                  <span className="price-main">{bookcarsHelper.formatPrice(helper.price(car, from as Date, to as Date, undefined, userMarkup), commonStrings.CURRENCY, language)}</span>
+                  <span className="price-day">{`${strings.PRICE_PER_DAY} ${bookcarsHelper.formatPrice(car.price + userMarkup, commonStrings.CURRENCY, language)}`}</span>
                 </div>
               )}
               {!hidePrice && (

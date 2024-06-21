@@ -1,9 +1,11 @@
 import LocalizedStrings from 'react-localization'
 import * as langHelper from '../common/langHelper'
+import { strings as commonStrings } from '../lang/common'
 
 const strings = new LocalizedStrings({
   fr: {
     NEW_CAR: 'Nouvelle voiture',
+    CAR_CURRENCY: `${commonStrings.CURRENCY}/day`,
     DELETE_CAR: 'Êtes-vous sûr de vouloir supprimer cette voiture ?',
     FUEL_POLICY: 'Politique carburant',
     DIESEL: 'Diesel',
@@ -73,10 +75,13 @@ const strings = new LocalizedStrings({
     AIRPORT_PICKUP:'Airport pickup',
     AIRPORT_DROPOFF:'Airport dropoff',
     AIRPORT_PICKUP_TOOLTIP:'Pickup from Airport',
-    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport'
+    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport',
+    MARKUP_PER_DAY:'Markup per day'
+
   },
   en: {
     NEW_CAR: 'New car',
+    CAR_CURRENCY: `${commonStrings.CURRENCY}/day`,
     DELETE_CAR: 'Are you sure you want to delete this car?',
     FUEL_POLICY: 'Fuel policy',
     DIESEL: 'Diesel',
@@ -146,7 +151,10 @@ const strings = new LocalizedStrings({
     AIRPORT_PICKUP:'Airport pickup',
     AIRPORT_DROPOFF:'Airport dropoff',
     AIRPORT_PICKUP_TOOLTIP:'Pickup from Airport',
-    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport'
+    AIRPORT_DROPOFF_TOOLTIP:'Return to Airport',
+    MARKUP_PER_DAY:'Markup per day'
+    
+
   },
 })
 

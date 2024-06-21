@@ -330,6 +330,7 @@ export interface User extends Document {
   enableEmailNotifications?: boolean
   avatar?: string
   bio?: string
+  markup?: number
   location?: string
   type?: bookcarsTypes.UserType
   blacklisted?: boolean
@@ -359,6 +360,7 @@ export interface UserInfo {
   enableEmailNotifications?: boolean
   avatar?: string
   bio?: string
+  markup?: number
   location?: string
   type?: string
   blacklisted?: boolean
