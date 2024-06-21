@@ -748,12 +748,12 @@ const UpdateBooking = () => {
                   inputProps={{
                     inputMode: 'numeric',
                     pattern: '^\\d+(.\\d+)?$',
+                    readOnly: true,
                   }}
                   onChange={handleMarkupPerDayChange}
                   variant="standard"
                   autoComplete="off"
                   value={markupPerDay.toString()} // Ensure the value is a string
-
                 />
               </FormControl>
               <FormControl fullWidth margin="dense" className="checkbox-fc">
