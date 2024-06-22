@@ -1,7 +1,7 @@
 #!/bin/bash
 
 start_time=$(date +%s)
-echo "Deploying BookCars frontend..."
+echo "Deploying DriveLink frontend..."
 
 cd /opt/bookcars
 git pull
@@ -23,7 +23,7 @@ sudo systemctl status nginx --no-pager
 finish_time=$(date +%s)
 elapsed_time=$((finish_time - start_time))
 ((sec=elapsed_time%60, elapsed_time/=60, min=elapsed_time%60))
-timestamp=$(printf "BookCars frontend deployed in %d minutes and %d seconds." $min $sec)
+timestamp=$(printf "DriveLink frontend deployed in %d minutes and %d seconds." $min $sec)
 echo "$timestamp"
 
 #$SHELL

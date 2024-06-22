@@ -103,7 +103,7 @@ export const DB_DEBUG = helper.StringToBoolean(__env__('BC_DB_DEBUG', false, 'fa
  *
  * @type {string}
  */
-export const COOKIE_SECRET = __env__('BC_COOKIE_SECRET', false, 'BookCars')
+export const COOKIE_SECRET = __env__('BC_COOKIE_SECRET', false, 'DriveLink')
 
 /**
  * Authentication cookie domain.
@@ -152,7 +152,7 @@ export const X_ACCESS_TOKEN = 'x-access-token'
  *
  * @type {string}
  */
-export const JWT_SECRET = __env__('BC_JWT_SECRET', false, 'BookCars')
+export const JWT_SECRET = __env__('BC_JWT_SECRET', false, 'DriveLink')
 
 /**
  * JWT expiration in seconds. Default is 86400 seconds (1 day).

@@ -288,7 +288,7 @@ const Header = ({
                   <MenuIcon />
                 </IconButton>
 
-                <Link href="/" className="logo">BookCars</Link>
+                <Link href="/" className="logo">DriveLink</Link>
               </>
             )}
             <Drawer open={isSideMenuOpen} onClose={handleSideMenuClose} className="menu">

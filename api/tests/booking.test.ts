@@ -214,7 +214,7 @@ describe('POST /api/checkout', () => {
       currency: 'usd',
       receiptEmail,
       customerName: 'John Doe',
-      description: 'BookCars Testing Service',
+      description: 'DriveLink Testing Service',
       locale: 'en',
       name: 'Test',
     }

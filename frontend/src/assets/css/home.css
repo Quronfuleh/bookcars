@@ -61,7 +61,7 @@ div.home footer div.copyright span.part2 {
   }
 
   div.home div.home-content span.home-logo-main::after {
-    content: 'BookCars';
+    content: 'DriveLink';
   }
 
   div.home div.home-content span.home-logo-registered {
@@ -195,7 +195,7 @@ div.home div.home-content {
   }
 
   div.home div.home-content span.home-logo-main::after {
-    content: 'BookCars';
+    content: 'DriveLink';
   }
 
   div.home div.home-content span.home-logo-registered {
