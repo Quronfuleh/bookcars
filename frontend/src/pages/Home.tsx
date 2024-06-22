@@ -106,7 +106,7 @@ const Home = () => {
   const onLoad = () => { }
 
   return (
-    <Layout onLoad={onLoad} strict={true}>
+    <Layout onLoad={onLoad} strict>
       <div className="home">
         <div className="home-content">
           <div className="home-logo">

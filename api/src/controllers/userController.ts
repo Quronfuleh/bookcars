@@ -486,6 +486,7 @@ export const signin = async (req: Request, res: Response) => {
         enableEmailNotifications: user.enableEmailNotifications,
         blacklisted: user.blacklisted,
         avatar: user.avatar,
+        markup: user.markup,
       }
 
       //

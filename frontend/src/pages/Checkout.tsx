@@ -692,7 +692,7 @@ const Checkout = () => {
 
   return (
     <ReCaptchaProvider>
-      <Layout onLoad={onLoad} strict={false}>
+      <Layout onLoad={onLoad} strict>
         {visible && car && from && to && pickupLocation && dropOffLocation && (
           <div className="booking">
             <Paper className="booking-form" elevation={10}>

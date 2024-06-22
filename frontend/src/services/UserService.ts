@@ -338,7 +338,15 @@ export const updateUser = (data: bookcarsTypes.UpdateUserPayload): Promise<numbe
       data,
       { withCredentials: true }
     )
-    .then((res) => res.status)
+    .then((res) => {
+      if (res.status === 200) {
+        const user = JSON.parse(localStorage.getItem('bc-user') ?? 'null')
+        user.markup = data.markup
+        localStorage.setItem('bc-user', JSON.stringify(user))
+      }
+      return res.status; // Ensure the status is returned
+
+    })
 
 
 /**
