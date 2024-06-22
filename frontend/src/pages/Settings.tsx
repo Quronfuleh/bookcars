@@ -189,7 +189,7 @@ const Settings = () => {
     <Layout onLoad={onLoad} user={user} strict>
       {visible && user && (
         <div className="settings">
-          <Paper className="settings-form settings-form-wrapper" elevation={10}>
+          <Paper className="settings-form settings-form-wrapper" elevation={30}>
             <form onSubmit={handleSubmit}>
               <Avatar
                 loggedUser={user}
@@ -214,7 +214,7 @@ const Settings = () => {
                 <Input type="text" required error={!phoneValid} onChange={handlePhoneChange} autoComplete="off" value={phone} />
                 <FormHelperText error={!phoneValid}>{(!phoneValid && commonStrings.PHONE_NOT_VALID) || ''}</FormHelperText>
               </FormControl>
-              {/* <FormControl fullWidth margin="dense">
+              <FormControl fullWidth margin="dense">
                 <DatePicker
                   label={commonStrings.BIRTH_DATE}
                   value={birthDate}
@@ -230,7 +230,7 @@ const Settings = () => {
                   }}
                   language={user.language}
                 />
-                <FormHelperText error={!birthDateValid}>{(!birthDateValid && commonStrings.BIRTH_DATE_NOT_VALID) || ''}</FormHelperText> */}
+                <FormHelperText error={!birthDateValid}>{(!birthDateValid && commonStrings.BIRTH_DATE_NOT_VALID) || ''}</FormHelperText>
               </FormControl>
               <FormControl fullWidth margin="dense">
                 <InputLabel>{commonStrings.LOCATION}</InputLabel>
