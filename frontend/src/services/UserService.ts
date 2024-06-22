@@ -89,11 +89,11 @@ export const validateEmail = (data: bookcarsTypes.ValidateEmailPayload): Promise
     .then((exist) => exist.status)
 
 /**
- * Sign in.
- *
- * @param {bookcarsTypes.SignInPayload} data
- * @returns {Promise<{ status: number, data: bookcarsTypes.User }>}
- */
+* Sign in.
+*
+* @param {bookcarsTypes.SignInPayload} data
+* @returns {Promise<{ status: number, data: bookcarsTypes.User }>}
+*/
 export const signin = (data: bookcarsTypes.SignInPayload): Promise<{ status: number, data: bookcarsTypes.User }> =>
   axiosInstance
     .post(
@@ -102,12 +102,32 @@ export const signin = (data: bookcarsTypes.SignInPayload): Promise<{ status: num
       { withCredentials: true }
     )
     .then((res) => {
-      // Assuming 'markup' is part of the response data under user details
-      if (res.data && res.data.user) {
-          localStorage.setItem('bc-user', JSON.stringify(res.data.user));
-      }
-      return { status: res.status, data: res.data.user };
-    });
+      localStorage.setItem('bc-user', JSON.stringify(res.data))
+      return { status: res.status, data: res.data }
+    })
+
+// /**
+//  * Sign in.
+//  *
+//  * @param {bookcarsTypes.SignInPayload} data
+//  * @returns {Promise<{ status: number, data: bookcarsTypes.User }>}
+//  */
+// export const signin = (data: bookcarsTypes.SignInPayload): Promise<{ status: number, data: bookcarsTypes.User }> =>
+//   axiosInstance
+//     .post(
+//       '/api/sign-in/frontend',
+//       data,
+//       { withCredentials: true }
+//     )
+//     .then((res) => {
+//       // Assuming 'markup' is part of the response data under user details
+//       if (res.data && res.data.user) {
+//           localStorage.setItem('bc-user', JSON.stringify(res.data.user));
+//       }
+//       return { status: res.status, data: res.data.user };
+//     });
+
+  
 
 
 /**
@@ -281,6 +301,30 @@ export const getUser = (id?: string): Promise<bookcarsTypes.User | null> => {
     resolve(null)
   })
 }
+// /**
+//  * Update a User.
+//  *
+//  * @param {bookcarsTypes.UpdateUserPayload} data
+//  * @returns {Promise<number>}
+//  */
+// export const updateUser = (data: bookcarsTypes.UpdateUserPayload): Promise<number> =>
+//   axiosInstance
+//     .post(
+//       '/api/update-user',
+//       data,
+//       { withCredentials: true }
+//     )
+//     .then((res) => {
+//         if (res.status === 200) {
+//             const updatedUser = getCurrentUser();
+//             if (updatedUser) {
+//                 updatedUser.markup = data.markup;  // Assuming 'markup' might be part of the update payload
+//                 localStorage.setItem('bc-user', JSON.stringify(updatedUser));
+//             }
+//         }
+//         return res.status;
+//     });
+
 /**
  * Update a User.
  *
@@ -294,16 +338,7 @@ export const updateUser = (data: bookcarsTypes.UpdateUserPayload): Promise<numbe
       data,
       { withCredentials: true }
     )
-    .then((res) => {
-        if (res.status === 200) {
-            const updatedUser = getCurrentUser();
-            if (updatedUser) {
-                updatedUser.markup = data.markup;  // Assuming 'markup' might be part of the update payload
-                localStorage.setItem('bc-user', JSON.stringify(updatedUser));
-            }
-        }
-        return res.status;
-    });
+    .then((res) => res.status)
 
 
 /**
