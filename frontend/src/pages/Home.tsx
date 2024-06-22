@@ -52,11 +52,9 @@ const Home = () => {
   
     
 
-    // const __minDate = new Date(_from)
-    // __minDate.setDate(__minDate.getDate() + 1)
+    const __minDate = new Date(_from)
+    __minDate.setDate(__minDate.getDate() + 2)
 
-    const __minDate = new Date()
-    __minDate.setMonth(__minDate.getMonth() + 2) // Set maxDate to two months in the future
 
     setMinDate(__minDate)
     setFrom(_from)
@@ -66,7 +64,7 @@ const Home = () => {
   useEffect(() => {
     if (from) {
       const __minDate = new Date(from)
-      __minDate.setDate(from.getDate() + 1)
+      __minDate.setDate(from.getDate() + 2)
       setMinDate(__minDate)
     }
   }, [from])
