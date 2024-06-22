@@ -73,7 +73,7 @@ const DateTimePicker = ({
         onError={onError}
         minDate={minDate}
         maxDate={maxDate}
-        timeSteps={{ hours: 1, minutes: 5 }}
+        timeSteps={{ hours: 1, minutes: 30 }}
         slotProps={{
           textField: {
             variant: variant || 'standard',
