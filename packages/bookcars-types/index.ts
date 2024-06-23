@@ -74,6 +74,9 @@ export interface Booking {
   _additionalDriver?: string | AdditionalDriver
   cancelRequest?: boolean
   price?: number
+  supplierPrice?: number
+  days?: number
+  totalCommission?: number
   markupPerDay?: number
   sessionId?: string
   paymentIntentId?: string

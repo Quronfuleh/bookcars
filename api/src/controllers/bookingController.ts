@@ -32,6 +32,8 @@ import stripeAPI from '../stripe'
 export const create = async (req: Request, res: Response) => {
   try {
     const { body }: { body: bookcarsTypes.UpsertBookingPayload } = req
+
+
     if (body.booking.additionalDriver) {
       const additionalDriver = new AdditionalDriver(body.additionalDriver)
       await additionalDriver.save()
@@ -39,6 +41,13 @@ export const create = async (req: Request, res: Response) => {
     }
 
     const booking = new Booking(body.booking)
+
+    const days = helper.days(booking.from, booking.to);
+    const supplierPrice = (booking.price || 0)
+
+
+    booking.days = days as number
+    booking.supplierPrice = supplierPrice as number
 
     await booking.save()
     return res.json(booking)
@@ -270,6 +279,15 @@ export const checkout = async (req: Request, res: Response) => {
 
     const booking = new Booking(body.booking)
 
+    const days = helper.days(booking.from, booking.to);
+    const totalCommission = booking.markupPerDay ? booking.markupPerDay * days : 0;
+    const supplierPrice = (booking.price || 0) - totalCommission;
+
+    // Assign the calculated values to the booking object
+    booking.days = days as number
+    booking.totalCommission = totalCommission as number
+    booking.supplierPrice = supplierPrice as number
+
     await booking.save()
 
     if (body.payLater) {
@@ -478,6 +496,7 @@ export const update = async (req: Request, res: Response) => {
         cancellation,
         amendments,
         markupPerDay,
+    
         theftProtection,
         collisionDamageWaiver,
         fullInsurance,
@@ -488,6 +507,10 @@ export const update = async (req: Request, res: Response) => {
       } = body.booking
 
       const previousStatus = booking.status
+      const days = helper.days(booking.from, booking.to); 
+      const totalCommission = booking.markupPerDay ? booking.markupPerDay * days : 0;
+      const supplierPrice = booking.price - totalCommission; 
+
 
       booking.supplier = new mongoose.Types.ObjectId(supplier as string)
       booking.car = new mongoose.Types.ObjectId(car as string)
@@ -496,10 +519,13 @@ export const update = async (req: Request, res: Response) => {
       booking.dropOffLocation = new mongoose.Types.ObjectId(dropOffLocation as string)
       booking.from = from
       booking.to = to
+      booking.days = days as number
       booking.status = status
       booking.cancellation = cancellation
       booking.amendments = amendments
-      booking.markupPerDay = markupPerDay ?? 0; // Use nullish coalescing to default to 0 if undefined
+      booking.markupPerDay = markupPerDay as number
+      booking.totalCommission = totalCommission as number
+      booking.supplierPrice = supplierPrice as number
       booking.theftProtection = theftProtection
       booking.collisionDamageWaiver = collisionDamageWaiver
       booking.fullInsurance = fullInsurance
@@ -507,7 +533,6 @@ export const update = async (req: Request, res: Response) => {
       booking.airportDropoff = airportDropoff
       booking.airportPickup = airportPickup
       booking.price = price as number
-
       if (!additionalDriver && booking._additionalDriver) {
         booking._additionalDriver = undefined
       }

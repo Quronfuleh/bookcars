@@ -79,7 +79,10 @@ const strings = new LocalizedStrings({
     OPTIONS: 'Options',
     VIEW: 'Consulter',
     OF: 'sur',
-    MARKUP:'markup',
+    MARKUP:'Markup',
+    DAYS:'Days',
+    TOTAL_COMMISSION:"Total commission",
+    SUPPLIER_PRICE:"Supplier price",
 
   },
   en: {
@@ -159,6 +162,9 @@ const strings = new LocalizedStrings({
     VIEW: 'View',
     OF: 'of',
     MARKUP:'markup',
+    DAYS:'Days',
+    TOTAL_COMMISSION:"Total commission",
+    SUPPLIER_PRICE:"Supplier price",
   },
 })
 

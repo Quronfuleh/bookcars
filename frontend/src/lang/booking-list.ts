@@ -22,6 +22,9 @@ const strings = new LocalizedStrings({
     CANCEL: 'Annuler cette réservation',
     CANCEL_BOOKING: 'Êtes-vous sûr de vouloir annuler cette réservation ?',
     CANCEL_BOOKING_REQUEST_SENT: "Votre requête d'annulation a bien été prise en compte. Nous vous contacterons pour finaliser la procédure d'annulation.",
+    MARKUP_PER_DAY: 'Markup/day',
+    TOTAL_COMMISSION:"Total Commission",
+    SUPPLIER_PRICE:"Supplier price",
   },
   en: {
     CAR: 'Car',
@@ -43,6 +46,9 @@ const strings = new LocalizedStrings({
     CANCEL: 'Cancel this booking',
     CANCEL_BOOKING: 'Are you sure you want to cancel this booking?',
     CANCEL_BOOKING_REQUEST_SENT: 'Your cancel request has been submited. We will contact you to finalize the cancellation procedure.',
+    MARKUP_PER_DAY: 'Markup/day',
+    TOTAL_COMMISSION:"Total Commission",
+    SUPPLIER_PRICE:"Supplier Price",
   },
 })
 

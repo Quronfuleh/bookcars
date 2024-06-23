@@ -140,6 +140,17 @@ export const clone = (obj: any) => (Array.isArray(obj) ? Array.from(obj) : ({ ..
  */
 export const isValidObjectId = (id?: string) => mongoose.isValidObjectId(id)
 
+
+/**
+ * Get number of days between two dates.
+ *
+ * @param {?Date} [from]
+ * @param {?Date} [to]
+ * @returns {number}
+ */
+export const days = (from?: Date, to?: Date) =>
+  (from && to && Math.ceil((to.getTime() - from.getTime()) / (1000 * 3600 * 24))) || 0
+
 /**
  * Check email.
  *

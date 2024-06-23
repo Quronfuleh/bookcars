@@ -398,6 +398,9 @@ export interface Booking extends Document {
   dropOffLocation: Types.ObjectId
   from: Date
   to: Date
+  totalCommission?: number
+  days?: number
+  supplierPrice?: number
   status: bookcarsTypes.BookingStatus
   cancellation?: boolean
   amendments?: boolean
@@ -501,6 +504,9 @@ export interface BookingInfo {
   dropOffLocation: Types.ObjectId
   from: Date
   to: Date
+  totalCommission?: number
+  days?: number
+  supplierPrice?: number
   status: bookcarsTypes.BookingStatus
   cancellation?: boolean
   amendments?: boolean

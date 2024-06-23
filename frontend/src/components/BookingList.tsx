@@ -4,7 +4,7 @@ import {
   GridColDef,
   GridPaginationModel,
   GridRowId,
-  GridRenderCellParams
+  GridRenderCellParams,
 } from '@mui/x-data-grid'
 import {
   Tooltip,
@@ -35,6 +35,8 @@ import { strings } from '../lang/booking-list'
 import { strings as csStrings } from '../lang/cars'
 import { strings as commonStrings } from '../lang/common'
 import env from '../config/env.config'
+
+
 
 import '../assets/css/booking-list.css'
 
@@ -224,12 +226,32 @@ const BookingList = ({
         valueGetter: (value: string) => getDate(value),
       },
       {
-        field: 'price',
-        headerName: strings.PRICE,
+        field: 'days',
+        headerName: commonStrings.DAYS,
         flex: 1,
-        renderCell: ({ value }: GridRenderCellParams<bookcarsTypes.Booking, string>) => <span className="bp">{value}</span>,
-        valueGetter: (value: number) => bookcarsHelper.formatPrice(value, commonStrings.CURRENCY, language as string),
+        valueGetter: (value: number) => value,
       },
+      {
+        field: 'markupPerDay',
+        headerName: strings.MARKUP_PER_DAY,
+        flex: 1,
+        valueGetter: (value: number) => bookcarsHelper.formatPrice(value, commonStrings.CURRENCY, language as string),
+
+      },
+      {
+        field: 'totalCommission',
+        headerName: strings.TOTAL_COMMISSION,
+        flex: 1,
+        valueGetter: (value: number) => bookcarsHelper.formatPrice(value, commonStrings.CURRENCY, language as string),
+
+      },
+      // {
+      //   field: 'price',
+      //   headerName: strings.PRICE,
+      //   flex: 1,
+      //   renderCell: ({ value }: GridRenderCellParams<bookcarsTypes.Booking, string>) => <span className="bp">{value}</span>,
+      //   valueGetter: (value: number) => bookcarsHelper.formatPrice(value, commonStrings.CURRENCY, language as string),
+      // },
       {
         field: 'status',
         headerName: strings.STATUS,

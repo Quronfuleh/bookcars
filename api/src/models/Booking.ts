@@ -93,6 +93,18 @@ const bookingSchema = new Schema<env.Booking>(
       type: Number,
       required: [true, "can't be blank"],
     },
+    totalCommission: {
+      type: Number,
+      default: 0,
+    },
+    days: {
+      type: Number,
+      default: 0,
+    },
+    supplierPrice: {
+      type: Number,
+      default: 0,
+    },
     markupPerDay: {
       type: Number,
       default: 0,
