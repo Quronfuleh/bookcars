@@ -43,18 +43,12 @@ const Home = () => {
     const _to = new Date(_from)
     _to.setDate(_to.getDate() + 3)
 
-    // const _maxDate = new Date(_to)
-    // _maxDate.setDate(_maxDate.getDate() - 1)
-    // setMaxDate(_maxDate)
-
-    const _maxDate = new Date()
-    _maxDate.setMonth(_maxDate.getMonth() + 2) // Set maxDate to two months in the future
-  
-    
+    const _maxDate = new Date(_to)
+    _maxDate.setDate(_maxDate.getDate() - 2)
+    setMaxDate(_maxDate)
 
     const __minDate = new Date(_from)
     __minDate.setDate(__minDate.getDate() + 2)
-
 
     setMinDate(__minDate)
     setFrom(_from)
@@ -144,7 +138,7 @@ const Home = () => {
                   onChange={(date) => {
                     if (date) {
                       const __minDate = new Date(date)
-                      __minDate.setDate(date.getDate() + 1)
+                      __minDate.setDate(date.getDate() + 3)
                       setFrom(date)
                       setMinDate(__minDate)
                       setFromError(false)
