@@ -577,7 +577,7 @@ const Checkout = () => {
           name: `${car.name} 
           - ${daysLabel} 
           - ${pickupLocation._id === dropOffLocation._id ? pickupLocation.name : `${pickupLocation.name} - ${dropOffLocation.name}`}`,
-          description: 'DriveLink Web Service',
+          description: 'Drivelink Web Service',
           customerName: (!authenticated ? driver?.fullName : user?.fullName) as string,
         }
         const res = await StripeService.createCheckoutSession(payload)

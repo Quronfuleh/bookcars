@@ -1,10 +1,10 @@
 [![build](https://github.com/aelassas/bookcars/actions/workflows/build.yml/badge.svg)](https://github.com/aelassas/bookcars/actions/workflows/build.yml) [![test](https://github.com/aelassas/bookcars/actions/workflows/test.yml/badge.svg)](https://github.com/aelassas/bookcars/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/aelassas/bookcars/graph/badge.svg?token=FSB0H9RDEQ)](https://codecov.io/gh/aelassas/bookcars) [![](https://img.shields.io/badge/docs-wiki-brightgreen)](https://github.com/aelassas/bookcars/wiki) [![](https://img.shields.io/badge/live-demo-brightgreen)](https://github.com/aelassas/bookcars?tab=readme-ov-file#live-demo)
 
-## DriveLink
+## Drivelink
 
-DriveLink is a car rental platform, supplier-oriented, with a backend for managing car fleets and bookings, as well as a frontend and a mobile app for renting cars.
+Drivelink is a car rental platform, supplier-oriented, with a backend for managing car fleets and bookings, as well as a frontend and a mobile app for renting cars.
 
-DriveLink is designed to work with multiple suppliers. Each supplier can manage his car fleet and bookings from the backend. DriveLink can also work with only one supplier and can be used as a car rental aggregator.
+Drivelink is designed to work with multiple suppliers. Each supplier can manage his car fleet and bookings from the backend. Drivelink can also work with only one supplier and can be used as a car rental aggregator.
 
 From the backend, admins can create and manage suppliers, cars, locations, customers and bookings.
 
@@ -14,7 +14,7 @@ Customers can sign up from the frontend or the mobile app, search for available 
 
 A key design decision was made to use TypeScript instead of JavaScript due to its numerous advantages. TypeScript offers strong typing, tooling, and integration, resulting in high-quality, scalable, more readable and maintainable code that is easy to debug and test.
 
-DriveLink can run in a Docker container. Follow this step by step [guide](https://github.com/aelassas/bookcars/wiki/Docker) to walk you through on how to build DriveLink Docker image and run it in a Docker container.
+Drivelink can run in a Docker container. Follow this step by step [guide](https://github.com/aelassas/bookcars/wiki/Docker) to walk you through on how to build Drivelink Docker image and run it in a Docker container.
 
 ## Features
 
@@ -78,4 +78,4 @@ DriveLink can run in a Docker container. Follow this step by step [guide](https:
 
 ## License
 
-DriveLink is [MIT licensed](https://github.com/aelassas/bookcars/blob/main/LICENSE).
+Drivelink is [MIT licensed](https://github.com/aelassas/bookcars/blob/main/LICENSE).

@@ -173,7 +173,7 @@ const HomeScreen = ({ navigation, route }: NativeStackScreenProps<StackParams, '
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled" nestedScrollEnabled>
           <View style={styles.contentContainer}>
             <View style={styles.logo}>
-              <Text style={styles.logoMain}>DriveLink</Text>
+              <Text style={styles.logoMain}>Drivelink</Text>
               <Text style={styles.logoRegistered}>®</Text>
             </View>
 
