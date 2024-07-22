@@ -66,7 +66,7 @@ const DatePicker = ({
             onChange(_value)
           }
 
-          if (_value && minDate && _value < minDate && onError) {
+          if (_value && minDate && _value < new Date(minDate.getTime() - 24 * 60 * 60 * 1000) && onError) {
             onError('minDate', _value)
           }
         }}
