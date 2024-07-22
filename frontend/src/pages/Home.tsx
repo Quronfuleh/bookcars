@@ -48,7 +48,7 @@ const Home = () => {
     setMaxDate(_maxDate)
 
     const __minDate = new Date(_from)
-    // __minDate.setDate(__minDate.getDate() + 2)
+    __minDate.setDate(__minDate.getDate() + 2)
 
     setMinDate(__minDate)
     setFrom(_from)
