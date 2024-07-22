@@ -35,7 +35,7 @@ const Home = () => {
   useEffect(() => {
     const _from = new Date()
     _from.setDate(_from.getDate())
-    _from.setHours(0)
+    _from.setHours(10)
     _from.setMinutes(0)
     _from.setSeconds(0)
     _from.setMilliseconds(0)
@@ -48,7 +48,7 @@ const Home = () => {
     setMaxDate(_maxDate)
 
     const __minDate = new Date(_from)
-    __minDate.setDate(__minDate.getDate() + 2)
+    // __minDate.setDate(__minDate.getDate() + 2)
 
     setMinDate(__minDate)
     setFrom(_from)
