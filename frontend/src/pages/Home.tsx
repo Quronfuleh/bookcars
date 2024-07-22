@@ -34,7 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     const _from = new Date()
-    _from.setDate(_from.getDate())
+    _from.setDate(_from.getDate() + 1)
     _from.setHours(10)
     _from.setMinutes(0)
     _from.setSeconds(0)
